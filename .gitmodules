@@ -1,0 +1,3 @@
+[submodule "Poto/vender/spdlog"]
+	path = Poto/vender/spdlog
+	url = https://github.com/gabime/spdlog
