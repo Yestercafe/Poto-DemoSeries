@@ -15,21 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Poto\Core.h">
+    <ClInclude Include="Poto\src\Poto\Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Poto\Application.h">
+    <ClInclude Include="Poto\src\Poto\Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Poto.h">
+    <ClInclude Include="Poto\src\Poto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Poto\EntryPoint.h">
+    <ClInclude Include="Poto\src\Poto\EntryPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Poto\src\Poto\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Poto\Application.cpp">
+    <ClCompile Include="Poto\src\Poto\Application.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Poto\src\Poto\Log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

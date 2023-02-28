@@ -4,6 +4,7 @@
 
 #include "Poto/Core.h"
 #include "Poto/Application.h"
+#include "Poto/Log.h"
 
 // ----Entry Point----------------------------------
 #include "Poto/EntryPoint.h"

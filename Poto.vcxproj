@@ -11,13 +11,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Poto.h" />
-    <ClInclude Include="src\Poto\Application.h" />
-    <ClInclude Include="src\Poto\Core.h" />
-    <ClInclude Include="src\Poto\EntryPoint.h" />
+    <ClInclude Include="Poto\src\Poto\Log.h" />
+    <ClInclude Include="Poto\src\Poto.h" />
+    <ClInclude Include="Poto\src\Poto\Application.h" />
+    <ClInclude Include="Poto\src\Poto\Core.h" />
+    <ClInclude Include="Poto\src\Poto\EntryPoint.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Poto\Application.cpp" />
+    <ClCompile Include="Poto\src\Poto\Log.cpp" />
+    <ClCompile Include="Poto\src\Poto\Application.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -67,6 +69,7 @@
       <PreprocessorDefinitions>PT_PLATFORM_WINDOWS;PT_BUILD_DLL;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Poto\vender\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -82,6 +85,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)Poto\vender\spdlog\include;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

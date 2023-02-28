@@ -6,6 +6,13 @@ extern Poto::Application* Poto::CreateApplication();
 
 int main(int argc, char** argv)
 {
+	Poto::Log::Init();
+	PT_CORE_WARN("Initialize Log");
+	PT_INFO("Hello");
+
+	int a = 5;
+	PT_INFO("Hello! var = {0}", a);
+
 	auto app = Poto::CreateApplication();
 	app->Run();
 	delete app;
