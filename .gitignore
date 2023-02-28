@@ -8,8 +8,8 @@ Intermediates/
 
 # Visual Studio files and folder
 **.vs/
-# **.sln
-# **.vcxproj
+**.sln
+**.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
 **.csproj
