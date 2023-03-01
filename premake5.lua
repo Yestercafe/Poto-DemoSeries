@@ -28,6 +28,7 @@ project "Poto"
 
 	includedirs
 	{
+		"%{prj.name}/vendor/src",
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
