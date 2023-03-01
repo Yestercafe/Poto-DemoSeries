@@ -33,6 +33,3 @@ namespace Poto
 #define PT_WARN(...)	    ::Poto::Log::GetClientLogger()->warn(__VA_ARGS__)
 #define PT_ERROR(...)	    ::Poto::Log::GetClientLogger()->error(__VA_ARGS__)
 #define PT_FATAL(...)	    ::Poto::Log::GetClientLogger()->fatal(__VA_ARGS__)
-
-// if dist build
-#define PT_CORE_INFO

@@ -2,8 +2,6 @@
 
 #include "Event.h"
 
-#include <sstream>
-
 namespace Poto
 {
 	class POTO_API MouseMovedEvent : public Event

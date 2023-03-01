@@ -2,9 +2,6 @@
 
 #include "Core.h"
 
-#include <string>
-#include <functional>
-
 namespace Poto
 {
 	// Events in Poto are currently blocking, meaning when an event occurs it
