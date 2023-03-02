@@ -12,6 +12,12 @@ workspace "Poto"
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Poto/vendor/GLFW/include"
+
+include "Poto/vendor/GLFW"
+
 project "Poto"
 	location "Poto"
 	kind "SharedLib"
@@ -28,8 +34,15 @@ project "Poto"
 
 	includedirs
 	{
-		"%{prj.name}/vendor/src",
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/src",
+		"%{prj.name}/vendor/spdlog/include",
+		"{IncludeDir.GLFW}"
+	}
+	
+	links
+	{
+		"GLFW",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"

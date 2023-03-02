@@ -1,3 +1,6 @@
 [submodule "Poto/vendor/spdlog"]
 	path = Poto/vendor/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "Poto/vendor/GLFW"]
+	path = Poto/vendor/GLFW
+	url = https://github.com/Lazarus-glhf/glfw.git
