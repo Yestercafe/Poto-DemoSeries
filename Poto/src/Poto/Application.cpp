@@ -9,14 +9,26 @@
 
 namespace Poto
 {
+#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
+
 	Application::Application()
 	{
 		m_window = std::unique_ptr<Window>(Window::Create());
+		m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 	}
 
 	Application::~Application()
 	{
 	}
+
+	void Application::OnEvent(Event& e)
+	{
+		EventDispatcher dispatcher(e);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+
+		PT_CORE_TRACE("{0}", e);
+	}
+
 	void Application::Run()
 	{
 		while(m_Running)
@@ -27,4 +39,9 @@ namespace Poto
 		}
 	}
 
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		m_Running = false;
+		return true;
+	}
 }

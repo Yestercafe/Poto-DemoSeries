@@ -2,6 +2,8 @@
 
 #include "Core.h"
 
+#include "ptpch.h"
+
 namespace Poto
 {
 	// Events in Poto are currently blocking, meaning when an event occurs it

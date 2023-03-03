@@ -21,7 +21,7 @@ namespace Poto
 		}
 
 		EVENT_CLASS_TYPE(MouseMoved)
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
 		float m_MouseX, m_MouseY;
 	};
@@ -38,12 +38,12 @@ namespace Poto
 		std::string ToString() const override
 		{
 			std::stringstream ss;
-			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset;
-			return ss;
+			ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
+			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseScrolled)
-		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
+			EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	private:
 		float m_XOffset, m_YOffset;
 	};
@@ -57,7 +57,7 @@ namespace Poto
 	protected:
 		MouseButtonEvent(int button)
 			: m_Button(button) {}
-	private:
+
 		int m_Button;
 	};
 
@@ -71,7 +71,7 @@ namespace Poto
 		{
 			std::stringstream ss;
 			ss << "MouseButtonPressedEvent: " << m_Button;
-			return ss;
+			return ss.str();
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonPressed)
@@ -92,5 +92,6 @@ namespace Poto
 
 		EVENT_CLASS_TYPE(MouseButtonReleased)
 	};
+
 
 }
