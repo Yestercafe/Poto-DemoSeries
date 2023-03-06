@@ -1,7 +1,6 @@
 workspace "Poto"
 	architecture "x64"
 	startproject "Sandbox"
-	
 
 	configurations
 	{
@@ -15,10 +14,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relative to root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Poto/vendor/GLFW/include"
-IncludeDir["GLAD"] = "Poto/vendor/GLAD/include"
+IncludeDir["Glad"] = "Poto/vendor/Glad/include"
 
 include "Poto/vendor/GLFW"
-include "Poto/vendor/GLAD"
+include "Poto/vendor/Glad"
 
 project "Poto"
 	location "Poto"
@@ -27,6 +26,9 @@ project "Poto"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	pchheader "ptpch.h"
+	pchsource "Poto/src/ptpch.cpp"
 
 	files
 	{
@@ -38,14 +40,14 @@ project "Poto"
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"{IncludeDir.GLFW}",
-		"{IncludeDir.GLAD}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}"
 	}
-	
-	links
-	{
+
+	links 
+	{ 
 		"GLFW",
-		"GLAD",
+		"Glad",
 		"opengl32.lib"
 	}
 
@@ -57,7 +59,8 @@ project "Poto"
 		defines
 		{
 			"PT_PLATFORM_WINDOWS",
-			"PT_BUILD_DLL"
+			"PT_BUILD_DLL",
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands

@@ -5,6 +5,8 @@
 #include "Poto/Events/KeyEvent.h"
 #include "Poto/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace Poto
 {
 	static bool s_GLFWInitialized = false;
@@ -49,7 +51,11 @@ namespace Poto
 
 		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(m_Window);
+
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		glfwSetWindowUserPointer(m_Window, &m_Data);
+		PT_CORE_ASSERT(status, "Failed to initialize GLAD!");
+
 		SetVSync(true);
 
 		// Set GLFW	callbacks
