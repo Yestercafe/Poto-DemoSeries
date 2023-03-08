@@ -7,6 +7,8 @@
 #include "Poto/Layer.h"
 #include "Poto/Log.h"
 
+#include "Poto/ImGui/ImGuiLayer.h"
+
 // ----Entry Point----------------------------------
 #include "Poto/EntryPoint.h"
 
