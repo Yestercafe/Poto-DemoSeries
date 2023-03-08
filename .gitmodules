@@ -4,3 +4,6 @@
 [submodule "Poto/vendor/GLFW"]
 	path = Poto/vendor/GLFW
 	url = https://github.com/Lazarus-glhf/glfw.git
+[submodule "Poto/vendor/imgui"]
+	path = Poto/vendor/imgui
+	url = git@github.com:Lazarus-glhf/imgui.git
