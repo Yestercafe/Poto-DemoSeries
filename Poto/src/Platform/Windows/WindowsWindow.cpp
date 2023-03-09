@@ -44,7 +44,7 @@ namespace Poto
 		{
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
-			PT_CORE_ASSERT(success, "Could initialize GLFW");
+			PT_CORE_ASSERT(success, "Could initialize GLFW")
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
 		}
