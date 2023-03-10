@@ -10,12 +10,23 @@ public:
 
 	void OnUpdate() override
 	{
-		PT_INFO("ExampleLayer::Update");
+		if (Poto::Input::IsKeyPressed(PT_KEY_TAB))
+		{
+			PT_TRACE("Tab key is pressed (poll)!");
+		}
 	}
 
 	void OnEnvent(Poto::Event& event) override
 	{
-		PT_TRACE("{0}", event);
+		if (event.GetEventType() == Poto::EventType::KeyPressed)
+		{
+			Poto::KeyPressedEvent& e = (Poto::KeyPressedEvent&)event;
+			if (e.GetKeyCode() == PT_KEY_TAB)
+			{
+				PT_TRACE("Tab key is pressed (event)!");
+			}
+			PT_TRACE("{0}", (char)e.GetKeyCode());
+		}
 	}
 };
 
@@ -30,9 +41,7 @@ public:
 
 	~Sandbox()
 	{
-
 	}
-
 };
 
 Poto::Application* Poto::CreateApplication()
