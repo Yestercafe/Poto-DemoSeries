@@ -1,4 +1,4 @@
-workspace "Poto"
+        workspace "Poto"
 	architecture "x64"
 	startproject "Sandbox"
 
@@ -16,6 +16,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Poto/vendor/GLFW/include"
 IncludeDir["Glad"] = "Poto/vendor/Glad/include"
 IncludeDir["ImGui"] = "Poto/vendor/imgui"
+IncludeDir["glm"] = "Poto/vendor/glm"
 
 group "Dependencies"
 	include "Poto/vendor/GLFW"
@@ -38,7 +39,9 @@ project "Poto"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -47,7 +50,8 @@ project "Poto"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -107,7 +111,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Poto/vendor/spdlog/include",
-		"Poto/src"
+		"Poto/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
