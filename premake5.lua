@@ -1,4 +1,4 @@
-workspace "Poto"
+        workspace "Poto"
 	architecture "x64"
 	startproject "Sandbox"
 
@@ -16,15 +16,19 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Poto/vendor/GLFW/include"
 IncludeDir["Glad"] = "Poto/vendor/Glad/include"
 IncludeDir["ImGui"] = "Poto/vendor/imgui"
+IncludeDir["glm"] = "Poto/vendor/glm"
 
-include "Poto/vendor/GLFW"
-include "Poto/vendor/Glad"
-include "Poto/vendor/imgui"
+group "Dependencies"
+	include "Poto/vendor/GLFW"
+	include "Poto/vendor/Glad"
+	include "Poto/vendor/imgui"
 
+group ""
 project "Poto"
 	location "Poto"
 	kind "SharedLib"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -35,7 +39,9 @@ project "Poto"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
 
 	includedirs
@@ -44,7 +50,8 @@ project "Poto"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links 
@@ -57,7 +64,6 @@ project "Poto"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -69,28 +75,29 @@ project "Poto"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
 		defines "PT_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "PT_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "PT_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	staticruntime "off"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -104,7 +111,8 @@ project "Sandbox"
 	includedirs
 	{
 		"Poto/vendor/spdlog/include",
-		"Poto/src"
+		"Poto/src",
+		"%{IncludeDir.glm}"
 	}
 
 	links
@@ -114,7 +122,6 @@ project "Sandbox"
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "On"
 		systemversion "latest"
 
 		defines
@@ -124,15 +131,15 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "PT_DEBUG"
-		buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "PT_RELEASE"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "PT_DIST"
-		buildoptions "/MD"
+		runtime "Release"
 		optimize "On"

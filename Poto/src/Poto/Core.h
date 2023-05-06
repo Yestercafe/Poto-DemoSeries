@@ -10,12 +10,18 @@
 	#error Poto only supports Windows
 #endif
 
+#ifdef PT_DEBUG
+	#define PT_ENABLE_ASSERTS
+#endif
+
 #ifdef PT_ENABLE_ASSERTS
-	#define PT_ASSERT(x, ...) {if(!(x))} { PT_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
-	#define PT_CORE_ASSERT(x, ...) { if(!(x)) { PT_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();)}}
+	#define PT_ASSERT(x, ...) {if(!(x)) { PT_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+	#define PT_CORE_ASSERT(x, ...) { if(!(x)) { PT_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
 #else
 	#define PT_ASSERT(x, ...)
 	#define PT_CORE_ASSERT(x, ...)
 #endif
 
 #define BIT(x) (1 << x)
+
+#define PT_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)

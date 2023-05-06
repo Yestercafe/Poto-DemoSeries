@@ -7,3 +7,6 @@
 [submodule "Poto/vendor/imgui"]
 	path = Poto/vendor/imgui
 	url = git@github.com:Lazarus-glhf/imgui.git
+[submodule "Poto/vendor/glm"]
+	path = Poto/vendor/glm
+	url = git@github.com:g-truc/glm.git

@@ -44,7 +44,7 @@ namespace Poto
 		{
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
-			PT_CORE_ASSERT(success, "Could initialize GLFW");
+			PT_CORE_ASSERT(success, "Could initialize GLFW")
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
 		}
@@ -101,6 +101,15 @@ namespace Poto
 				}
 			}
 		});
+
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window, unsigned int keycode)
+		{
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
+		});
+		
 
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
 		{
