@@ -7,7 +7,9 @@
 
 namespace Poto
 {
-
+	/**
+	 * @brief Windows 属性
+	 */
 	struct WindowProps
 	{
 		std::string Title;
@@ -32,7 +34,13 @@ namespace Poto
 
 		virtual void OnUpdate() = 0;
 
+		/**
+		 * @brief 返回窗口宽度
+		 */
 		virtual unsigned int GetWidth() const = 0;
+		/**
+		 * @brief 返回窗口高度
+		 */
 		virtual unsigned int GetHeight() const = 0;
 
 		// Window attributes

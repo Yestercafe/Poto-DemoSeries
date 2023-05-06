@@ -30,6 +30,12 @@ namespace Poto
 		EventCategoryMouseButton	= BIT(4),
 	};
 
+	/**
+	 * # 可以将其后的内容转化成字符串
+	 * ## 可以起粘接作用，将 ## 后的内容粘到前面的内容，如 EventType::##type 这里
+	 * type 是个变量，它的值会被粘到 EventType:: 后，如 type = WindowCloseEvent
+	 * 结果为 return EventType::WindowCloseEvent;
+	*/ 
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
