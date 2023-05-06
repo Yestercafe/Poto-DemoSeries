@@ -14,6 +14,10 @@ namespace Poto
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
 		virtual void OnUpdate() {}
+		virtual void OnImGuiRender() {}
+		/**
+		 * @brief when a event sent to layer
+		 */
 		virtual void OnEnvent(Event& event) {}
 
 		inline const std::string& GetName() const { return m_Debugname; }

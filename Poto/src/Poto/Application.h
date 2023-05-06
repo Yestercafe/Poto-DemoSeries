@@ -5,6 +5,7 @@
 #include "Poto/LayerStack.h"
 #include "Poto/Events/Event.h"
 #include "Poto/Events/ApplicationEvent.h"
+#include "ImGui/ImGuiLayer.h"
 
 namespace Poto
 {
@@ -21,7 +22,7 @@ namespace Poto
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		inline Window& GetWindow() { return *m_window; }
+		inline Window& GetWindow() const { return *m_window; }
 
 		inline static Application& Get() { return *s_Instance; }
 
@@ -29,6 +30,7 @@ namespace Poto
 		bool OnWindowClose(WindowCloseEvent& e);
 
 		std::unique_ptr<Window> m_window;
+		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 

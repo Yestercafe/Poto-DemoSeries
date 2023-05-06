@@ -22,6 +22,8 @@ namespace Poto
 
 		m_window = std::unique_ptr<Window>(Window::Create());
 		m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		m_ImGuiLayer = new ImGuiLayer();
 	}
 
 	Application::~Application()
