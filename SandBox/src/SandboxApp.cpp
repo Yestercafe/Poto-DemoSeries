@@ -18,12 +18,12 @@ public:
 		}
 	}
 
-	//virtual void OnImGuiRender() override
-	//{
-	//	ImGui::Begin("Test");
-	//	ImGui::Text("Hello World");
-	//	ImGui::End();
-	//}
+	virtual void OnImGuiRender() override
+	{
+		//ImGui::Begin("Test");
+		//ImGui::Text("Hello World");
+		//ImGui::End();
+	}
 
 	void OnEnvent(Poto::Event& event) override
 	{
@@ -45,7 +45,6 @@ public:
 	Sandbox()
 	{
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Poto::ImGuiLayer());
 	}
 
 	~Sandbox()

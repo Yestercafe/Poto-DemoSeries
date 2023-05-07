@@ -18,12 +18,10 @@ IncludeDir["Glad"] = "Poto/vendor/Glad/include"
 IncludeDir["ImGui"] = "Poto/vendor/imgui"
 IncludeDir["glm"] = "Poto/vendor/glm"
 
-group "Dependencies"
-	include "Poto/vendor/GLFW"
-	include "Poto/vendor/Glad"
-	include "Poto/vendor/imgui"
+include "Poto/vendor/GLFW"
+include "Poto/vendor/Glad"
+include "Poto/vendor/imgui"
 
-group ""
 project "Poto"
 	location "Poto"
 	kind "SharedLib"
@@ -41,7 +39,7 @@ project "Poto"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
-		"%{prj.name}/vendor/glm/glm/**.inl"
+		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
 
 	includedirs
