@@ -1,5 +1,7 @@
 #include <Poto.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public Poto::Layer
 {
 public:
@@ -15,6 +17,13 @@ public:
 			PT_TRACE("Tab key is pressed (poll)!");
 		}
 	}
+
+	//virtual void OnImGuiRender() override
+	//{
+	//	ImGui::Begin("Test");
+	//	ImGui::Text("Hello World");
+	//	ImGui::End();
+	//}
 
 	void OnEnvent(Poto::Event& event) override
 	{

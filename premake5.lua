@@ -1,4 +1,4 @@
-        workspace "Poto"
+workspace "Poto"
 	architecture "x64"
 	startproject "Sandbox"
 
@@ -112,6 +112,7 @@ project "Sandbox"
 	{
 		"Poto/vendor/spdlog/include",
 		"Poto/src",
+		"Poto/vendor",
 		"%{IncludeDir.glm}"
 	}
 

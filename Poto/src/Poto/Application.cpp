@@ -1,5 +1,4 @@
 #include "ptpch.h"
-
 #include "Application.h"
 
 #include "Events/ApplicationEvent.h"
@@ -24,6 +23,7 @@ namespace Poto
 		m_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
 		m_ImGuiLayer = new ImGuiLayer();
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	Application::~Application()
@@ -47,8 +47,6 @@ namespace Poto
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		PT_CORE_TRACE("{0}", e);
-
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
 			(*--it)->OnEnvent(e);
@@ -70,6 +68,14 @@ namespace Poto
 			{
 				layer->OnUpdate();
 			}
+
+			m_ImGuiLayer->Begin();
+			for (Layer* layer : m_LayerStack)
+			{
+				layer->OnImGuiRender();
+			}
+
+			m_ImGuiLayer->End();
 
 			m_window->OnUpdate();
 		}

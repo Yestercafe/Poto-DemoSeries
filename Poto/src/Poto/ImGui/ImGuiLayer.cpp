@@ -2,13 +2,10 @@
 #include "ImGuiLayer.h"
 
 #include "imgui.h"
-#include "GLFW/glfw3.h"
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
 
 #include "Poto/Application.h"
-
-#include "Poto/ImGui/ImGuiBuild.cpp"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
@@ -40,6 +37,7 @@ namespace Poto
 
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
+		//ImGui::StyleColorsClassic();
 
 		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
 		ImGuiStyle& style = ImGui::GetStyle();
