@@ -20,9 +20,9 @@ public:
 
 	virtual void OnImGuiRender() override
 	{
-		//ImGui::Begin("Test");
-		//ImGui::Text("Hello World");
-		//ImGui::End();
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::End();
 	}
 
 	void OnEnvent(Poto::Event& event) override

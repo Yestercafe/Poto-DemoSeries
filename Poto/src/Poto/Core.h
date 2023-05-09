@@ -1,11 +1,16 @@
 #pragma once
 
 #ifdef PT_PLATFORM_WINDOWS
+#if PT_DYNAMIC_LINK
 	#ifdef PT_BUILD_DLL
 		#define POTO_API _declspec(dllexport)
 	#else
 		#define POTO_API _declspec(dllimport)
 	#endif
+#else
+	#define POTO_API
+#endif
+
 #else
 	#error Poto only supports Windows
 #endif
