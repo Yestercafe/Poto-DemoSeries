@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Poto/Window.h"
+#include "Poto/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"
 
@@ -29,6 +30,7 @@ namespace Poto
 		virtual void ShutDown();
 
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{

@@ -1,6 +1,6 @@
 #include <Poto.h>
 
-#include "imgui/imgui.h"
+ #include "imgui/imgui.h"
 
 class ExampleLayer : public Poto::Layer
 {
@@ -56,4 +56,3 @@ Poto::Application* Poto::CreateApplication()
 {
 	return new Sandbox();
 }
-
