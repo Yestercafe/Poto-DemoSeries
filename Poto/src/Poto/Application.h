@@ -1,22 +1,19 @@
 #pragma once
 
 #include "Core.h"
+
 #include "Window.h"
 #include "Poto/LayerStack.h"
 #include "Poto/Events/Event.h"
 #include "Poto/Events/ApplicationEvent.h"
 
-#include "ImGui/ImGuiLayer.h"
+#include "Poto/Core/Timestep.h"
 
-#include "Renderer/Shader.h"
-#include "Renderer/Buffer.h"
-#include "Renderer/VertexArray.h"
-
-#include "Poto/Renderer/OrthographicCamera.h"
+#include "Poto/ImGui/ImGuiLayer.h"
 
 namespace Poto
 {
-	class POTO_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -36,18 +33,13 @@ namespace Poto
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 
+	private:
 		std::unique_ptr<Window> m_window;
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<Shader> m_BlueShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthographicCamera m_Camera;
+		float m_LastFrameTime = 0.0f;
 	private:
 		static Application* s_Instance;
 	};

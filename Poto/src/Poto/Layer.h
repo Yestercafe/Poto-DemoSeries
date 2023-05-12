@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Poto/Core.h"
+#include "Core/Timestep.h"
 #include "Poto/Events/Event.h"
 
 namespace Poto
@@ -13,7 +14,7 @@ namespace Poto
 
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 		virtual void OnImGuiRender() {}
 		/**
 		 * @brief when a event sent to layer

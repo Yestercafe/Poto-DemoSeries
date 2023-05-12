@@ -94,5 +94,4 @@ namespace Poto
 		ImGui::ShowDemoWindow(&show);
 	}
 
-
 }
