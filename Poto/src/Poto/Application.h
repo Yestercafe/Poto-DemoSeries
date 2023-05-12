@@ -12,6 +12,8 @@
 #include "Renderer/Buffer.h"
 #include "Renderer/VertexArray.h"
 
+#include "Poto/Renderer/OrthographicCamera.h"
+
 namespace Poto
 {
 	class POTO_API Application
@@ -44,6 +46,8 @@ namespace Poto
 
 		std::shared_ptr<Shader> m_BlueShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthographicCamera m_Camera;
 	private:
 		static Application* s_Instance;
 	};
