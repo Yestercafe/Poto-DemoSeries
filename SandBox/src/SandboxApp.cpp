@@ -31,7 +31,7 @@ public:
 		m_VertexArray->AddVertexBuffer(vertexBuffer);
 
 		uint32_t indices[3] = { 0, 1, 2 };
-		std::shared_ptr<Poto::IndexBuffer> indexBuffer;
+		Poto::Ref<Poto::IndexBuffer> indexBuffer;
 		indexBuffer.reset(Poto::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 		m_VertexArray->SetIndexBuffer(indexBuffer);
 
@@ -47,7 +47,8 @@ public:
 		Poto::Ref<Poto::VertexBuffer> squareVB;
 		squareVB.reset(Poto::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
-			{ Poto::ShaderDataType::Float3, "a_Position" }
+			{ Poto::ShaderDataType::Float3, "a_Position" },
+			{ Poto::ShaderDataType::Float2, "a_TexCoord" }
 			});
 		m_SquareVA->AddVertexBuffer(squareVB);
 
