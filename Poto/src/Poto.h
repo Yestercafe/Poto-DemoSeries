@@ -27,8 +27,3 @@
 
 #include "Poto/Renderer/OrthographicCamera.h"
 // -----------------------------------
-
-// ----Entry Point----------------------------------
-#include "Poto/Core/EntryPoint.h"
-
-// ----Entry Point----------------------------------
