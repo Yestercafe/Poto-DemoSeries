@@ -17,6 +17,7 @@ IncludeDir["GLFW"] = "Poto/vendor/GLFW/include"
 IncludeDir["Glad"] = "Poto/vendor/Glad/include"
 IncludeDir["ImGui"] = "Poto/vendor/imgui"
 IncludeDir["glm"] = "Poto/vendor/glm"
+IncludeDir["stb_image"] = "Poto/vendor/stb_image"
 
 include "Poto/vendor/GLFW"
 include "Poto/vendor/Glad"
@@ -39,6 +40,8 @@ project "Poto"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl",
 	}
@@ -55,7 +58,8 @@ project "Poto"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links 
