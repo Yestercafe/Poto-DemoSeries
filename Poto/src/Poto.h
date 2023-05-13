@@ -2,16 +2,16 @@
 
 // For use by Poto applications
 
-#include "Poto/Core.h"
-#include "Poto/Application.h"
-#include "Poto/Layer.h"
-#include "Poto/Log.h"
+#include "Poto/Core/Core.h"
+#include "Poto/Core/Application.h"
+#include "Poto/Core/Layer.h"
+#include "Poto/Core/Log.h"
 
 #include "Poto/Core/TimeStep.h"
 
-#include "Poto/Input.h"
-#include "Poto/KeyCode.h"
-#include "Poto/MouseButtonCodes.h"
+#include "Poto/Core/Input.h"
+#include "Poto/Core/KeyCode.h"
+#include "Poto/Core/MouseButtonCodes.h"
 #include "Poto/OrthographicCameraController.h"
 
 #include "Poto/ImGui/ImGuiLayer.h"
@@ -29,6 +29,6 @@
 // -----------------------------------
 
 // ----Entry Point----------------------------------
-#include "Poto/EntryPoint.h"
+#include "Poto/Core/EntryPoint.h"
 
 // ----Entry Point----------------------------------

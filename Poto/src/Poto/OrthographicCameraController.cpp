@@ -1,8 +1,8 @@
 #include "ptpch.h"
 #include "OrthographicCameraController.h"
 
-#include "Poto/Input.h"
-#include "KeyCode.h"
+#include "Poto/Core/Input.h"
+#include "Poto/Core/KeyCode.h"
 
 namespace Poto {
 

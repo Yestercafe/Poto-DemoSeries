@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Poto/Window.h"
+#include "Poto/Core/Window.h"
 #include "Poto/Renderer/GraphicsContext.h"
 
 #include "GLFW/glfw3.h"

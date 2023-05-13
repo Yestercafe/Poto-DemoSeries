@@ -1,7 +1,7 @@
 #include "ptpch.h"
 #include "WindowsInput.h"
 
-#include "Poto/Application.h"
+#include "Poto/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Poto

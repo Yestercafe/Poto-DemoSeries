@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Poto/Core.h"
+#include "Poto/Core/Core.h"
 
 namespace Poto
 {

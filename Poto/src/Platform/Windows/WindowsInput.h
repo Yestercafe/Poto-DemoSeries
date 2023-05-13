@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Poto/Input.h"
+#include "Poto/Core/Input.h"
 
 namespace Poto
 {

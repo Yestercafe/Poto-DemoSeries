@@ -1,8 +1,7 @@
 #pragma once
 
-#include "Core.h"
-
 #include "ptpch.h"
+#include "Poto/Core/Core.h"
 
 namespace Poto
 {

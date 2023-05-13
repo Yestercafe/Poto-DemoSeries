@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Poto/Core.h"
-#include "Core/Timestep.h"
+#include "Poto/Core/Core.h"
+#include "Poto/Core/Timestep.h"
 #include "Poto/Events/Event.h"
 
 namespace Poto

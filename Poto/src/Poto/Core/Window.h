@@ -2,7 +2,7 @@
 
 #include "ptpch.h"
 
-#include "Poto/Core.h"
+#include "Poto/Core/Core.h"
 #include "Poto/Events/Event.h"
 
 namespace Poto
