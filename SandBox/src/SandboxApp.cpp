@@ -21,7 +21,7 @@ public:
 			 0.0f,  0.5f, 0.0f, 0.8f, 0.8f, 0.2f, 1.0f
 		};
 
-		std::shared_ptr<Poto::VertexBuffer> vertexBuffer;
+		Poto::Ref<Poto::VertexBuffer> vertexBuffer;
 		vertexBuffer.reset(Poto::VertexBuffer::Create(vertices, sizeof(vertices)));
 		Poto::BufferLayout layout = {
 			{ Poto::ShaderDataType::Float3, "a_Position" },
@@ -37,14 +37,14 @@ public:
 
 		m_SquareVA.reset(Poto::VertexArray::Create());
 
-		float squareVertices[3 * 4] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f,  0.5f, 0.0f,
-			-0.5f,  0.5f, 0.0f
+		float squareVertices[5 * 4] = {
+			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
+			 0.5f,  0.5f, 0.0f, 1.0f, 1.0f,
+			-0.5f,  0.5f, 0.0f, 0.0f, 1.0f
 		};
 
-		std::shared_ptr<Poto::VertexBuffer> squareVB;
+		Poto::Ref<Poto::VertexBuffer> squareVB;
 		squareVB.reset(Poto::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 		squareVB->SetLayout({
 			{ Poto::ShaderDataType::Float3, "a_Position" }
@@ -127,6 +127,41 @@ public:
 		)";
 
 		m_FlatColorShader.reset(Poto::Shader::Create(flatColorShaderVertexSrc, flatColorShaderFragmentSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec2 a_TexCoord;
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+			out vec2 v_TexCoord;
+			void main()
+			{
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);	
+			}
+		)";
+
+		std::string textureShaderFragmentSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) out vec4 color;
+			in vec2 v_TexCoord;
+			
+			uniform sampler2D u_Texture;
+			void main()
+			{
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		m_TextureShader.reset(Poto::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
+
+		m_Texture = Poto::Texture2D::Create("assets/textures/Checkerboard.png");
+
+		std::dynamic_pointer_cast<Poto::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Poto::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
 	}
 
 	void OnUpdate(Poto::Timestep ts) override
@@ -170,7 +205,8 @@ public:
 			}
 		}
 
-		Poto::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		Poto::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		Poto::Renderer::EndScene();
 	}
@@ -188,11 +224,13 @@ public:
 	}
 
 private:
-	std::shared_ptr<Poto::Shader> m_Shader;
-	std::shared_ptr<Poto::VertexArray> m_VertexArray;
+	Poto::Ref<Poto::Shader> m_Shader;
+	Poto::Ref<Poto::VertexArray> m_VertexArray;
 
-	std::shared_ptr<Poto::Shader> m_FlatColorShader;
-	std::shared_ptr<Poto::VertexArray> m_SquareVA;
+	Poto::Ref<Poto::Shader> m_FlatColorShader, m_TextureShader;
+	Poto::Ref<Poto::VertexArray> m_SquareVA;
+
+	Poto::Ref<Poto::Texture2D> m_Texture;
 
 	Poto::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;

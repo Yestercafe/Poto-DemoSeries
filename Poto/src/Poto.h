@@ -21,6 +21,7 @@
 
 #include "Poto/Renderer/Buffer.h"
 #include "Poto/Renderer/Shader.h"
+#include "Poto/Renderer/Texture.h"
 #include "Poto/Renderer/VertexArray.h"
 
 #include "Poto/Renderer/OrthographicCamera.h"
