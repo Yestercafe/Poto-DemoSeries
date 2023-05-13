@@ -160,6 +160,7 @@ public:
 		m_TextureShader.reset(Poto::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc));
 
 		m_Texture = Poto::Texture2D::Create("assets/textures/Checkerboard.png");
+		m_BunnyTexture = Poto::Texture2D::Create("assets/textures/Bunny.gif");
 
 		std::dynamic_pointer_cast<Poto::OpenGLShader>(m_TextureShader)->Bind();
 		std::dynamic_pointer_cast<Poto::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
@@ -208,6 +209,8 @@ public:
 
 		m_Texture->Bind();
 		Poto::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		m_BunnyTexture->Bind();
+		Poto::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		Poto::Renderer::EndScene();
 	}
@@ -231,7 +234,7 @@ private:
 	Poto::Ref<Poto::Shader> m_FlatColorShader, m_TextureShader;
 	Poto::Ref<Poto::VertexArray> m_SquareVA;
 
-	Poto::Ref<Poto::Texture2D> m_Texture;
+	Poto::Ref<Poto::Texture2D> m_Texture, m_BunnyTexture;
 
 	Poto::OrthographicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
