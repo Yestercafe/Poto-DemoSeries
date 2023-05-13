@@ -50,7 +50,7 @@ namespace Poto
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
 		{
-			(*--it)->OnEnvent(e);
+			(*--it)->OnEvent(e);
 			if (e.Handled)
 			{
 				break;

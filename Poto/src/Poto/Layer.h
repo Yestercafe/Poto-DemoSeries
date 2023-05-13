@@ -19,7 +19,7 @@ namespace Poto
 		/**
 		 * @brief when a event sent to layer
 		 */
-		virtual void OnEnvent(Event& event) {}
+		virtual void OnEvent(Event& event) {}
 
 		inline const std::string& GetName() const { return m_Debugname; }
 
