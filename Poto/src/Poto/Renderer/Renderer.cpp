@@ -2,6 +2,7 @@
 #include "Renderer.h"
 
 #include "Platform/OpenGL/OpenGLShader.h"
+#include "Poto/Renderer/Renderer2D.h"
 
 namespace Poto {
 

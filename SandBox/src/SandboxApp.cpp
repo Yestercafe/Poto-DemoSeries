@@ -209,7 +209,7 @@ class Sandbox : public Poto::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new Sandbox2D());
+		PushLayer(new ExampleLayer());
 	}
 
 	~Sandbox()

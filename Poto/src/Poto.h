@@ -18,6 +18,7 @@
 
 // ---Renderer------------------------
 #include "Poto/Renderer/Renderer.h"
+#include "Poto/Renderer/Renderer2D.h"
 #include "Poto/Renderer/RenderCommand.h"
 
 #include "Poto/Renderer/Buffer.h"
