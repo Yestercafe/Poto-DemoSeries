@@ -12,8 +12,8 @@ namespace Poto
 	struct Renderer2DStorage
 	{
 		Ref<VertexArray> QuadVertexArray;
-		Ref<Shader> FlatColorShader;
 		Ref<Shader> TextureShader;
+		Ref<Texture2D> WhiteTexture;
 	};
 
 	static Renderer2DStorage* S_Data;
@@ -43,7 +43,10 @@ namespace Poto
 		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		S_Data->QuadVertexArray->SetIndexBuffer(squareIB);
 
-		S_Data->FlatColorShader = Shader::Create("assets/shaders/FlatColor.glsl");
+		S_Data->WhiteTexture = Texture2D::Create(1, 1);
+		uint32_t whiteTextureData = 0xffffffff;
+		S_Data->WhiteTexture->SetData(&whiteTextureData, sizeof(uint32_t));
+
 		S_Data->TextureShader = Shader::Create("assets/shaders/Texture.glsl");
 		S_Data->TextureShader->Bind();
 		S_Data->TextureShader->SetInt("u_Texture", 0);
@@ -56,16 +59,12 @@ namespace Poto
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
-		S_Data->FlatColorShader->Bind();
-		S_Data->FlatColorShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
-
 		S_Data->TextureShader->Bind();
 		S_Data->TextureShader->SetMat4("u_ViewProjection", camera.GetViewProjectionMatrix());
 	}
 
 	void Renderer2D::EndScene()
 	{
-		
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& Position, const glm::vec2& size, const glm::vec4& color)
@@ -75,12 +74,12 @@ namespace Poto
 
 	void Renderer2D::DrawQuad(const glm::vec3& Position, const glm::vec2& size, const glm::vec4& color)
 	{
-		S_Data->FlatColorShader->Bind();
-		S_Data->FlatColorShader->SetFloat4("u_Color", color);
+		S_Data->TextureShader->SetFloat4("u_Color", color);
+		S_Data->WhiteTexture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), Position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
-		S_Data->FlatColorShader->SetMat4("u_Transform", transform);
 
+		S_Data->TextureShader->SetMat4("u_Transform", transform);
 		S_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndexed(S_Data->QuadVertexArray);
 	}
@@ -92,12 +91,11 @@ namespace Poto
 
 	void Renderer2D::DrawQuad(const glm::vec3& Position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
-		S_Data->TextureShader->Bind();
+		S_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
+		texture->Bind();
 
 		glm::mat4 transform = glm::translate(glm::mat4(1.0f), Position) * glm::scale(glm::mat4(1.0f), { size.x, size.y, 1.0f });
 		S_Data->TextureShader->SetMat4("u_Transform", transform);
-
-		texture->Bind();
 
 		S_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndexed(S_Data->QuadVertexArray);
