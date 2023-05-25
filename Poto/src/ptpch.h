@@ -15,6 +15,8 @@
 
 #include "Poto/Core/Log.h"
 
+#include "Poto/Debug/Instrumentor.h"
+
 #ifdef PT_PLATFORM_WINDOWS
 #include <Windows.h>
 #endif
