@@ -11,6 +11,8 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnAttach()
 {
+	PT_PROFILE_FUNCTION()
+
 	m_CheckerboardTexture = Poto::Texture2D::Create("assets/textures/Checkerboard.png");
 }
 
@@ -23,10 +25,8 @@ void Sandbox2D::OnUpdate(Poto::Timestep ts)
 	PT_PROFILE_FUNCTION();
 
 	// Update
-	{
-		PT_PROFILE_SCOPE("CameraController::OnUpdate");
-		m_CameraController.OnUpdate(ts);
-	}
+	m_CameraController.OnUpdate(ts);
+
 	// Render
 	{
 		PT_PROFILE_SCOPE("Renderer Prep");

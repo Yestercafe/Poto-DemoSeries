@@ -14,6 +14,8 @@ namespace Poto
 	}
 	void OpenGLContext::Init()
 	{
+		PT_PROFILE_FUNCTION()
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		PT_CORE_ASSERT(status, "Failed to initialize Glad!");
@@ -21,6 +23,8 @@ namespace Poto
 
 	void OpenGLContext::SwapBuffers()
 	{
+		PT_PROFILE_FUNCTION()
+
 		glfwSwapBuffers(m_WindowHandle);
 	}
 

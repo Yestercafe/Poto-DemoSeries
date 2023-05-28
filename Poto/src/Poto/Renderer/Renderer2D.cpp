@@ -20,6 +20,8 @@ namespace Poto
 
 	void Renderer2D::Init()
 	{
+		PT_PROFILE_FUNCTION()
+
 		S_Data = new Renderer2DStorage();
 		S_Data->QuadVertexArray = VertexArray::Create();
 
@@ -54,6 +56,8 @@ namespace Poto
 
 	void Renderer2D::ShutDown()
 	{
+		PT_PROFILE_FUNCTION()
+
 		delete S_Data;
 	}
 
@@ -65,6 +69,7 @@ namespace Poto
 
 	void Renderer2D::EndScene()
 	{
+		PT_PROFILE_FUNCTION()
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& Position, const glm::vec2& size, const glm::vec4& color)
@@ -74,6 +79,8 @@ namespace Poto
 
 	void Renderer2D::DrawQuad(const glm::vec3& Position, const glm::vec2& size, const glm::vec4& color)
 	{
+		PT_PROFILE_FUNCTION()
+
 		S_Data->TextureShader->SetFloat4("u_Color", color);
 		S_Data->WhiteTexture->Bind();
 
@@ -91,6 +98,8 @@ namespace Poto
 
 	void Renderer2D::DrawQuad(const glm::vec3& Position, const glm::vec2& size, const Ref<Texture2D>& texture)
 	{
+		PT_PROFILE_FUNCTION()
+
 		S_Data->TextureShader->SetFloat4("u_Color", glm::vec4(1.0f));
 		texture->Bind();
 

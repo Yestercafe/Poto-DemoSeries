@@ -12,7 +12,7 @@
 #include "Poto/Core/Input.h"
 #include "Poto/Core/KeyCode.h"
 #include "Poto/Core/MouseButtonCodes.h"
-#include "Poto/OrthographicCameraController.h"
+#include "Poto/Renderer/OrthographicCameraController.h"
 
 #include "Poto/ImGui/ImGuiLayer.h"
 

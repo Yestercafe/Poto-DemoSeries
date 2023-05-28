@@ -23,17 +23,23 @@ namespace Poto
 
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
+		PT_PROFILE_FUNCTION()
+
 		Init(props);
 	}
 
 	WindowsWindow::~WindowsWindow()
 	{
+		PT_PROFILE_FUNCTION()
+
 		ShutDown();
 	}
 
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
+		PT_PROFILE_FUNCTION()
+
 		m_Data.Title = props.Title;
 		m_Data.Height = props.Height;
 		m_Data.Width = props.Width;
@@ -42,15 +48,19 @@ namespace Poto
 
 		if (!s_GLFWInitialized)
 		{
+			PT_PROFILE_FUNCTION()
+
 			// TODO: glfwTerminate on system shutdown
 			int success = glfwInit();
 			PT_CORE_ASSERT(success, "Could initialize GLFW")
 			glfwSetErrorCallback(GLFWErrorCallback);
 			s_GLFWInitialized = true;
 		}
-
-		// 创建窗口
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		{
+			PT_PROFILE_FUNCTION()
+			// 创建窗口
+			m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		}
 
 		m_Context = new OpenGLContext(m_Window);
 		m_Context->Init();
@@ -151,17 +161,23 @@ namespace Poto
 
 	void WindowsWindow::ShutDown()
 	{
+		PT_PROFILE_FUNCTION()
+
 		glfwDestroyWindow(m_Window);
 	}
 	
 	void WindowsWindow::OnUpdate()
 	{
+		PT_PROFILE_FUNCTION()
+
 		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
 	}
 
 	void WindowsWindow::SetVSync(bool enabled)
 	{
+		PT_PROFILE_FUNCTION()
+
 		if (enabled)
 		{
 			glfwSwapInterval(1);

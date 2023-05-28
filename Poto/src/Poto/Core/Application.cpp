@@ -17,6 +17,8 @@ namespace Poto
 
 	Application::Application()
 	{
+		PT_PROFILE_FUNCTION()
+
 		PT_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
@@ -31,20 +33,31 @@ namespace Poto
 
 	Application::~Application()
 	{
+		PT_PROFILE_FUNCTION()
+
+		//Renderer::ShutDown()
 	}
 
 	void Application::PushLayer(Layer* layer)
 	{
+		PT_PROFILE_FUNCTION()
+
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* layer)
 	{
+		PT_PROFILE_FUNCTION()
+
 		m_LayerStack.PushOverlay(layer);
+		layer->OnAttach();
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		PT_PROFILE_FUNCTION()
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
@@ -61,27 +74,38 @@ namespace Poto
 
 	void Application::Run()
 	{
-		while(m_Running)
+		PT_PROFILE_FUNCTION()
+
+		while (m_Running)
 		{
-			float time = (float)glfwGetTime();
+			PT_PROFILE_FUNCTION()
+
+				float time = (float)glfwGetTime();
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 
 			if (!m_Minimized)
 			{
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(timestep);
+				{
+					PT_PROFILE_SCOPE("LayerStack OnUpdate")
+
+						for (Layer* layer : m_LayerStack)
+							layer->OnUpdate(timestep);
+				}
+
+				m_ImGuiLayer->Begin();
+				{
+					PT_PROFILE_SCOPE("LayerStack OnImGuiRenderer")
+					for (Layer* layer : m_LayerStack)
+					{
+						layer->OnImGuiRender();
+					}
+
+					m_ImGuiLayer->End();
+				}
+
+				m_window->OnUpdate();
 			}
-
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-			{
-				layer->OnImGuiRender();
-			}
-
-			m_ImGuiLayer->End();
-
-			m_window->OnUpdate();
 		}
 	}
 
@@ -93,6 +117,8 @@ namespace Poto
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		PT_PROFILE_FUNCTION()
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;
