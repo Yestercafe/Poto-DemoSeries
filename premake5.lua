@@ -1,6 +1,6 @@
 workspace "Poto"
 	architecture "x64"
-	startproject "Sandbox"
+	startproject "EatingSnake"
 
 	configurations
 	{
@@ -100,6 +100,59 @@ project "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++17"
+	staticruntime "on"
+
+	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
+	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+	files
+	{
+		"%{prj.name}/src/**.h",
+		"%{prj.name}/src/**.cpp"
+	}
+
+	includedirs
+	{
+		"Poto/vendor/spdlog/include",
+		"Poto/src",
+		"Poto/vendor",
+		"Poto/vendor/imgui/bin/Debug-windows-x86_64/ImGui",
+		"%{IncludeDir.glm}"
+	}
+
+	links
+	{
+		"Poto"
+	}
+
+	filter "system:windows"
+		systemversion "latest"
+
+		defines
+		{
+			"PT_PLATFORM_WINDOWS"
+		}
+
+	filter "configurations:Debug"
+		defines "PT_DEBUG"
+		runtime "Debug"
+		symbols "on"
+
+	filter "configurations:Release"
+		defines "PT_RELEASE"
+		runtime "Release"
+		optimize "on"
+
+	filter "configurations:Dist"
+		defines "PT_DIST"
+		runtime "Release"
+		optimize "on"
+		
+project "EatingSnake"
+	location "EatingSnake"
+	kind "ConsoleApp"
+	language "C++"
+	cppdialect "C++20"
 	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
