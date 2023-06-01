@@ -177,7 +177,7 @@ namespace Poto
 	void WindowsWindow::SetVSync(bool enabled)
 	{
 		PT_PROFILE_FUNCTION()
-
+ 
 		if (enabled)
 		{
 			glfwSwapInterval(1);
