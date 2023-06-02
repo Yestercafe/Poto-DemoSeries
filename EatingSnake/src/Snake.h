@@ -17,10 +17,6 @@ public:
     auto IsDead() const {
         return m_bDead;
     }
-    auto GetAge() const
-    {
-        return m_Age;
-    }
     auto GetScore() const
     {
         return m_Score;
@@ -40,11 +36,11 @@ public:
     };
     void SetDirection(Direction d);
 
+    float m_Age;
 private:
     uint m_Score;
     std::list<std::pair<uint, uint>> m_SnakeChain;
     bool m_bDead;
     uint m_WorldWidth, m_WorldHeight;
-    uint m_Age;
     Direction m_Direction;
 };

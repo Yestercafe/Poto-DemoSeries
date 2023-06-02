@@ -25,7 +25,7 @@ Snake::Snake(uint worldWidth, uint worldHeight)
     
     m_bDead = false;
     m_Score = 0u;
-    m_Age = 0u;
+    m_Age = 0.f;
 }
 
 void Snake::MoveByStep()
@@ -56,7 +56,6 @@ void Snake::MoveByStep()
     }
 
     m_SnakeChain.push_front(newHead);
-    ++m_Age;
 }
 
 bool Snake::IsOutOfWorld(const std::pair<uint, uint>& pos) const
