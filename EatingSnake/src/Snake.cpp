@@ -28,27 +28,20 @@ Snake::Snake(uint worldWidth, uint worldHeight)
     m_Age = 0.f;
 }
 
-void Snake::MoveByStep()
+void Snake::MoveByStep(bool shouldInc)
 {
     if (m_bDead) return;
-    
-    m_SnakeChain.pop_back();
-    std::pair<uint, uint> newHead = m_SnakeChain.front();
-    switch (m_Direction)
+
+    if (!shouldInc)
     {
-    case Direction::Left:
-        --newHead.first;
-        break;
-    case Direction::Right:
-        ++newHead.first;
-        break;
-    case Direction::Up:
-        ++newHead.second;
-        break;
-    case Direction::Down:
-        --newHead.second;
-        break;
+        m_SnakeChain.pop_back();
     }
+    else
+    {
+        ++m_Score;
+    }
+    
+    std::pair<uint, uint> newHead = HeadNextStep();
 
     if (IsCrash(newHead) || IsOutOfWorld(newHead))
     {
@@ -76,4 +69,26 @@ void Snake::SetDirection(Direction d)
         return;
     }
     m_Direction = d;
+}
+
+std::pair<uint, uint> Snake::HeadNextStep() const
+{
+    std::pair<uint, uint> newHead = m_SnakeChain.front();
+    switch (m_Direction)
+    {
+    case Direction::Left:
+        --newHead.first;
+        break;
+    case Direction::Right:
+        ++newHead.first;
+        break;
+    case Direction::Up:
+        ++newHead.second;
+        break;
+    case Direction::Down:
+        --newHead.second;
+        break;
+    }
+
+    return newHead;
 }

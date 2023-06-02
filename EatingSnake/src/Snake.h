@@ -6,7 +6,7 @@ class Snake
 {
 public:
     Snake(uint worldWidth, uint worldHeight);
-    void MoveByStep();
+    void MoveByStep(bool shouldInc);
     bool IsOutOfWorld(const std::pair<uint, uint>& pos) const;
     bool IsCrash(const std::pair<uint, uint>& pos) const;
 
@@ -36,6 +36,8 @@ public:
     };
     void SetDirection(Direction d);
 
+    std::pair<uint, uint> HeadNextStep() const;
+    
     float m_Age;
 private:
     uint m_Score;

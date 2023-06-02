@@ -18,16 +18,19 @@ void Level::Reset()
 
 void Level::TicToc()
 {
+    bool shouldInc = false;
     if (m_Food.has_value())
     {
-        if (m_Food.value() == m_Snake->GetSnakeChain().front())
+        if (m_Food.value() == m_Snake->HeadNextStep())
         {
-            m_Snake->IncScore();
+            shouldInc = true;
             m_Food = {};
         }
     }
+    
     m_Snake->m_Age += 1.f / FACTOR;
-    m_Snake->MoveByStep();
+    m_Snake->MoveByStep(shouldInc);
+    
     if (m_Snake->IsDead())
     {
         auto score = m_Snake->GetScore();
