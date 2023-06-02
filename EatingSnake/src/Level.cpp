@@ -14,6 +14,7 @@ void Level::Reset()
 {
     m_Snake = Poto::CreateScope<Snake>(m_LevelSize.first, m_LevelSize.second);
     m_Food = {};
+    m_LevelTimer = 0.f;
 }
 
 void Level::TicToc()
@@ -24,11 +25,12 @@ void Level::TicToc()
         if (m_Food.value() == m_Snake->HeadNextStep())
         {
             shouldInc = true;
+            m_Snake->m_Age = m_LevelTimer * GetNextFactor();
             m_Food = {};
         }
     }
     
-    m_Snake->m_Age += 1.f / FACTOR;
+    m_Snake->m_Age += 1.f / GetFactor();
     m_Snake->MoveByStep(shouldInc);
     
     if (m_Snake->IsDead())
@@ -68,7 +70,7 @@ bool Level::OnUpdate(Poto::Timestep ts)
     }
 
     m_LevelTimer += ts;
-    if (FACTOR * m_LevelTimer > m_Snake->m_Age)
+    if (GetFactor() * m_LevelTimer > m_Snake->m_Age)
     {
         TicToc();
     }

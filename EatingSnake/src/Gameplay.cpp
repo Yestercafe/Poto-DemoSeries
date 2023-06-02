@@ -2,6 +2,7 @@
 
 #include "Random.h"
 #include "imgui/imgui.h"
+#include <format>
 
 Gameplay::Gameplay()
     : Layer("Gameplay")
@@ -46,6 +47,57 @@ void Gameplay::OnUpdate(Poto::Timestep ts)
 
 void Gameplay::OnImGuiRender()
 {
+    auto& window = Poto::Application::Get().GetWindow();
+    auto pos = ImGui::GetWindowPos();
+    auto width = window.GetWidth();
+    auto height = window.GetHeight();
+    
+    int color = 0xff0000ff;
+    auto factor = static_cast<uint>(m_WorldTimer * 50);
+    auto epoch = factor / 0xff;
+    auto r = factor % 0xff;
+    auto g = 0xfe - factor % 0xff;
+    if (epoch & 1)
+    {
+        std::swap(r, g);
+    }
+    color |= (r << 16);
+    color |= (g <<  8);
+    
+    switch (m_GameState)
+    {
+    case GameState::Playing:
+        {
+            const auto score = m_Level->GetScore();
+            const auto scoreStr = std::format("Score: {}", score);
+            ImGui::GetOverlayDrawList()->AddText(m_Font, 48.f, pos, color, scoreStr.c_str());
+            break;
+        }
+    case GameState::Menu:
+        {
+            const std::string content {"Press any key to play"};
+            auto textBoxSize = m_Font->CalcTextSizeA(72.f, 0.f, 0.f, content.c_str());
+            pos.x += width * 0.25f;
+            pos.y += height * 0.2f;
+            ImGui::GetOverlayDrawList()->AddText(m_Font, 72.f, pos, color, content.c_str());
+            break;
+        }
+    case GameState::Dead:
+        {
+            const auto score = m_Level->GetScore();
+            const auto str1 = std::format("Game over!");
+            const auto str2 = std::format("Your final score is: {}", score);
+            const auto str3 = std::format("Press any key to retry");
+            pos.x += width * 0.2f;
+            pos.y += height * 0.15f;
+            ImGui::GetOverlayDrawList()->AddText(m_Font, 48.f, pos, color, str1.c_str());
+            pos.y += 40.f;
+            ImGui::GetOverlayDrawList()->AddText(m_Font, 48.f, pos, color, str2.c_str());
+            pos.y += 40.f;
+            ImGui::GetOverlayDrawList()->AddText(m_Font, 48.f, pos, color, str3.c_str());
+            break;
+        }
+    }
 }
 
 void Gameplay::OnEvent(Poto::Event& event)
@@ -57,6 +109,16 @@ void Gameplay::OnEvent(Poto::Event& event)
 
 bool Gameplay::OnKeyPressed(Poto::KeyPressedEvent& e)
 {
+    switch (m_GameState)
+    {
+    case GameState::Menu:
+        m_GameState = GameState::Playing;
+        return true;
+    case GameState::Dead:
+        m_Level->Reset();
+        m_GameState = GameState::Playing;
+        return true;
+    }
     switch (e.GetKeyCode())
     {
     case PT_KEY_UP:

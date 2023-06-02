@@ -29,7 +29,7 @@ private:
 		Menu = 0,
 		Playing = 1,
 		Dead = 2,
-	} m_GameState = GameState::Playing;
+	} m_GameState = GameState::Menu;
 
 	ImFont* m_Font;
 	float m_WorldTimer{};
